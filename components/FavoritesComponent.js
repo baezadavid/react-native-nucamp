@@ -32,9 +32,9 @@ class Favorites extends Component {
             return (
                 <SwipeRow rightOpenValue={-100} style={styles.swipeRow}>
                     <View style={styles.deleteView}>
-                        <TouchableOpacity 
+                        <TouchableOpacity
                             style={styles.deleteTouchable}
-                            onPress={() => 
+                            onPress={() =>
                                 Alert.alert(
                                     'Delete Favorite?',
                                     'Are you sure you wish to delete the favorite campsite ' +
@@ -60,12 +60,12 @@ class Favorites extends Component {
 
                     </View>
                     <View>
-                    <ListItem
-                        title={item.name}
-                        subtitle={item.description}
-                        leftAvatar={{ source: { uri: baseUrl + item.image } }}
-                        onPress={() => navigate('CampsiteInfo', { campsiteId: item.id })}
-                    />
+                        <ListItem
+                            title={item.name}
+                            subtitle={item.description}
+                            leftAvatar={{ source: { uri: baseUrl + item.image } }}
+                            onPress={() => navigate('CampsiteInfo', { campsiteId: item.id })}
+                        />
                     </View>
                 </SwipeRow>
             );
