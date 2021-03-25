@@ -45,7 +45,7 @@ function RenderCampsite(props) {
                     'Are you sure you wish to add ' + campsite.name + ' to favorite?',
                     [
                         {
-                            text: 'Canel',
+                            text: 'Cancel',
                             style: 'cancel',
                             onPress: () => console.log('Cancel Pressed')
                         },
@@ -56,12 +56,12 @@ function RenderCampsite(props) {
                     ],
                     { cancelable: false }
                 )
-                
+
             } else if (recognizeComment(gestureState)) {
                 console.log('comment');
                 props.onShowModal();
 
-            } 
+            }
             return true;
         }
     })
