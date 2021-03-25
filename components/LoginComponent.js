@@ -19,28 +19,33 @@ class Login extends Component {
         title: 'Login'
     }
 
-    handleLogn() {
+    handleLogin() {
         console.log(JSON.stringify(this.state));
         if (this.state.remember) {
-            SecureStore.setItemAsync('userinfo', JSON.stringify(
-                {username: this.state.username, password: this.state.password}))
-                .catch(error => console.log('Could not save user infor', error));
+            SecureStore.setItemAsync(
+                'userinfo',
+                JSON.stringify({
+                    username: this.state.username,
+                    password: this.state.password
+                })
+            ).catch(error => console.log('Could not save user info', error));
         } else {
-            SecureStore.deleteItemAsync('userinfo')
-                .catch(error => console.log('Could not delete user info', error))
+            SecureStore.deleteItemAsync('userinfo').catch(
+                error => console.log('Could not delete user info', error)
+            );
         }
     }
 
     componentDidMount() {
         SecureStore.getItemAsync('userinfo')
-        .then(userdata => {
-            const userinfo = JSON.parse(userdata);
-            if (userinfo) {
-                this.setState({username: userinfo.username});
-                this.setState({password: userinfo.password});
-                this.setState({remember: true})
-            }
-        });
+            .then(userdata => {
+                const userinfo = JSON.parse(userdata);
+                if (userinfo) {
+                    this.setState({ username: userinfo.username });
+                    this.setState({ password: userinfo.password });
+                    this.setState({ remember: true })
+                }
+            });
     }
 
     render() {
@@ -48,28 +53,29 @@ class Login extends Component {
             <View style={styles.container}>
                 <Input
                     placeholder='Username'
-                    LeftIcon={{type: 'font-awesome', name: 'user-o'}}
-                    onChange={username => this.setState({username})}
+                    leftIcon={{ type: 'font-awesome', name: 'user-o' }}
+                    onChangeText={username => this.setState({ username })}
                     value={this.state.username}
                     containerStyle={styles.formInput}
-                    leftIconContainerStyle={styles.formIcon} 
+                    leftIconContainerStyle={styles.formIcon}
                 />
                 <Input
                     placeholder='Password'
-                    LeftIcon={{ type: 'font-awesome', name: 'key' }}
-                    onChange={password => this.setState({ password })}
+                    leftIcon={{ type: 'font-awesome', name: 'key' }}
+                    onChangeText={password => this.setState({ password })}
                     value={this.state.password}
                     containerStyle={styles.formInput}
                     leftIconContainerStyle={styles.formIcon}
                 />
                 <CheckBox
                     title='Remember Me'
-                    centerchecked={this.state.remember}
-                    onPress={() => this.setState({remember: !this.state.remember})}
+                    center
+                    checked={this.state.remember}
+                    onPress={() => this.setState({ remember: !this.state.remember })}
                     containerStyle={styles.formCheckbox}
                 />
-                <View style={styles.forButton}>
-                    <Button 
+                <View style={styles.formButton}>
+                    <Button
                         onPress={() => this.handleLogin()}
                         title='Login'
                         color='#5637DD'
@@ -78,7 +84,6 @@ class Login extends Component {
             </View>
         );
     }
-
 }
 
 const styles = StyleSheet.create({
@@ -86,7 +91,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         margin: 20
     },
-    forIcon: {
+    formIcon: {
         marginRight: 10
     },
     formInput: {
